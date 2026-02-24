@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  zeroclaw:
+    image: ghcr.io/zeroclaw-labs/zeroclaw:latest
+    container_name: zeroclaw
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./zeroclaw/data:/data
+      - ./zeroclaw/config:/config
+    environment:
+      - OPENAI_API_KEY=your_openai_key_here
+      - ANTHROPIC_API_KEY=your_anthropic_key_here
+    command: daemon
+
+networks:
+  default:
+    name: agent-network
