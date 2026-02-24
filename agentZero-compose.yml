@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  agent-zero:
+    image: frdel/agent-zero:latest
+    container_name: agent-zero
+    restart: unless-stopped
+    ports:
+      - "5000:80"
+    volumes:
+      - ./agent-zero/memory:/a0/memory
+      - ./agent-zero/work_dir:/a0/work_dir
+    environment:
+      - OPENAI_API_KEY=your_openai_key_here
+      - ANTHROPIC_API_KEY=your_anthropic_key_here
+    tty: true
+    stdin_open: true
+
+networks:
+  default:
+    name: agent-network
